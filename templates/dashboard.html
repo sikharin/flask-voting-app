@@ -23,6 +23,12 @@
       margin-bottom: 40px;
       font-size: 28px;
     }
+<<<<<<< HEAD
+=======
+    h2 {
+      text-align: center;
+    }
+>>>>>>> fac1b2f (Initial commit with latest version)
     .chart-box {
       background-color: #16213e;
       border-radius: 15px;
@@ -40,6 +46,7 @@
       font-size: 20px;
       margin-bottom: 20px;
     }
+<<<<<<< HEAD
     .score-text {
       text-align: center;
       font-size: 16px;
@@ -62,11 +69,71 @@
         ความเป็นไปได้: {{ item.feasibility }} | 
         การนำเสนอ: {{ item.presentation }}
       </div>
+=======
+    .project img {
+      display: block;
+      margin: auto;
+      width: 300px;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .score-text {
+      text-align: center;
+      color: #ffffff;
+      margin-top: 10px;
+    }
+    .grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* แสดงแถวละ 3 เมื่อหน้าจอกว้าง */
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.project-card {
+  background-color: #16213e;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #0f3460;
+  text-align: center;
+}
+
+.project-card img {
+  display: block;
+  margin: 10px auto;
+  width: 150px;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.project-card h2 {
+  color: #ffffff;
+  margin: 10px 0;
+}
+
+  </style>
+</head>
+<body>
+
+  <h1>📊 สรุปคะแนนจากกรรมการ</h1>
+
+  <div class="grid-container">
+    {% for item in summary %}
+    <div class="project-card">
+      <h2>{{ item.project_title }}</h2>
+      <img src="{{ item.project_image }}" alt="รูปเจ้าของผลงาน">
+      
+      <canvas id="total-chart-{{ loop.index }}" width="300" height="80"></canvas>
+      <h2>คะแนนรวม: {{ item.total_score|round(1) }}</h2>
+      <canvas id="chart-{{ loop.index }}" width="370" height="200"></canvas>
+>>>>>>> fac1b2f (Initial commit with latest version)
     </div>
     {% endfor %}
   </div>
 
   <script>
+<<<<<<< HEAD
     const summaries = {{ summary | tojson }};
     summaries.forEach((item, idx) => {
       const ctx = document.getElementById('chart-' + (idx + 1)).getContext('2d');
@@ -88,10 +155,122 @@
                   size: 14
                 }
               }
+=======
+    Chart.register({
+        id: 'labelAtEnd',
+        afterDatasetsDraw(chart, args, options) {
+          const { ctx } = chart;
+          chart.data.datasets.forEach((dataset, i) => {
+            const meta = chart.getDatasetMeta(i);
+            meta.data.forEach((bar, index) => {
+              const value = dataset.data[index];
+              ctx.save();
+              ctx.fillStyle = '#fff';
+              ctx.font = 'bold 20px Kanit';
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'middle';
+              ctx.fillText(value, bar.x + -2, bar.y);
+              ctx.restore();
+            });
+          });
+        }
+      });
+    const summaries = {{ summary | tojson | safe }};
+    summaries.forEach((item, idx) => {
+      // Chart หลัก 5 เกณฑ์
+      const ctx = document.getElementById('chart-' + (idx + 1)).getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: [
+            '🎯 LEAN', 
+            '⚙️ ระบบ', 
+            '🌟 KPI', 
+            '🎤 ถ่ายทอด', 
+            '✨ ร่วมมือ'
+          ],
+          datasets: [{
+            label: 'คะแนน',
+            data: [
+              item.lean_alignment,
+              item.process_system,
+              item.kpi_and_results,
+              item.knowledge_transfer,
+              item.creativity_and_engagement
+            ],
+            backgroundColor: [
+              '#4ea8de',
+              '#00b894',
+              '#fdcb6e',
+              '#a29bfe',
+              '#ff7675'
+            ]
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 20
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+>>>>>>> fac1b2f (Initial commit with latest version)
             }
           }
         }
       });
+<<<<<<< HEAD
+=======
+
+      // Chart แนวนอน (bar chart) สำหรับคะแนนรวม
+      // Horizontal rainbow bar chart for total score
+      const totalCtx = document.getElementById('total-chart-' + (idx + 1)).getContext('2d');
+      const gradient = totalCtx.createLinearGradient(0, 0, 300, 0);
+      gradient.addColorStop(0.0, '#FF0000');
+      gradient.addColorStop(0.2, '#FF9900');
+      gradient.addColorStop(0.4, '#FFFF00');
+      gradient.addColorStop(0.6, '#33CC33');
+      gradient.addColorStop(0.8, '#3399FF');
+      gradient.addColorStop(1.0, '#9900CC');
+
+          new Chart(totalCtx, {
+            type: 'bar',
+            data: {
+              labels: [''],  // ✅ ไม่ตั้งชื่อเพื่อเลี่ยง legend
+              datasets: [{
+                data: [item.total_score],
+                backgroundColor: gradient,
+                borderRadius: 10,
+                barThickness: 30,         // ✅ แถบหนา
+                categoryPercentage: 1.0,  // ✅ ช่วยให้ barThickness มีผล
+                barPercentage: 1.0
+              }]
+            },
+            options: {
+              indexAxis: 'y',
+              responsive: false,
+              scales: {
+                x: {
+                  beginAtZero: true,
+                  max: 100,
+                  ticks: { display: false },
+                  grid: { display: false }
+                },
+                y: {
+                  ticks: { display: false },
+                  grid: { display: false }
+                }
+              },
+              plugins: {
+                legend: { display: false }  // ✅ ไม่ขึ้น undefined แน่นอน
+              }
+            },
+            plugins: ['labelAtEnd']  // ✅ ตำแหน่งที่ถูกต้อง
+          });
+>>>>>>> fac1b2f (Initial commit with latest version)
     });
   </script>
 </body>
