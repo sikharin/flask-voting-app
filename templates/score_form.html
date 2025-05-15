@@ -31,29 +31,13 @@
     }
     .project-info img {
       border-radius: 10px;
-<<<<<<< HEAD
-      max-width: 150px;
-=======
       max-width: 300px;
->>>>>>> fac1b2f (Initial commit with latest version)
       margin-top: 10px;
     }
     .rating-group {
       margin-top: 20px;
     }
     .rating-label {
-<<<<<<< HEAD
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
-    .score-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: center;
-      margin-top: 10px;
-    }
-=======
       font-size: 24px;
       margin-bottom: 10px;
     }
@@ -65,22 +49,10 @@
     }
     
 
->>>>>>> fac1b2f (Initial commit with latest version)
     .score-buttons input[type="radio"] {
       display: none;
     }
     .score-buttons label {
-<<<<<<< HEAD
-      padding: 10px 16px;
-      background-color: #0f3460;
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 16px;
-      border: 2px solid transparent;
-    }
-=======
       aspect-ratio: 1 / 1; /* ✅ ทำให้ปุ่มเป็นจัตุรัส */
       font-size: 22px;
       padding: 0;
@@ -96,7 +68,6 @@
       border: 2px solid transparent;
     }
 
->>>>>>> fac1b2f (Initial commit with latest version)
     .score-buttons input[type="radio"]:checked + label {
       background-color: #e94560;
       border-color: #ff6b81;
@@ -117,8 +88,6 @@
     button:hover {
       background-color: #ff6b81;
     }
-<<<<<<< HEAD
-=======
     /* สำหรับหน้าจอมือถือ */
     @media (max-width: 600px) {
   .score-buttons {
@@ -131,7 +100,6 @@
 
 }
 
->>>>>>> fac1b2f (Initial commit with latest version)
   </style>
 </head>
 <body>
@@ -144,13 +112,6 @@
     </div>
     <form method="POST">
 
-<<<<<<< HEAD
-      {% for field, label in [('creativity', '🌟 ความคิดสร้างสรรค์'), ('feasibility', '🚀 ความเป็นไปได้'), ('presentation', '🎤 การนำเสนอ')] %}
-      <div class="rating-group">
-        <div class="rating-label">{{ label }}</div>
-        <div class="score-buttons">
-          {% for i in range(1, 11) %}
-=======
       {% for field, label in [
         ('lean_alignment', '🎯 ความสอดคล้องกับแนวคิด LEAN'),
         ('process_system', '🧪 ความเป็นระบบของกระบวนการ'),
@@ -162,7 +123,6 @@
         <div class="rating-label">{{ label }}</div>
         <div class="score-buttons">
           {% for i in range(1, 6) %}
->>>>>>> fac1b2f (Initial commit with latest version)
           <input type="radio" id="{{ field }}-{{ i }}" name="{{ field }}" value="{{ i }}" required>
           <label for="{{ field }}-{{ i }}">{{ i }}</label>
           {% endfor %}

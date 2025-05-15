@@ -23,12 +23,9 @@
       margin-bottom: 40px;
       font-size: 28px;
     }
-<<<<<<< HEAD
-=======
     h2 {
       text-align: center;
     }
->>>>>>> fac1b2f (Initial commit with latest version)
     .chart-box {
       background-color: #16213e;
       border-radius: 15px;
@@ -46,30 +43,6 @@
       font-size: 20px;
       margin-bottom: 20px;
     }
-<<<<<<< HEAD
-    .score-text {
-      text-align: center;
-      font-size: 16px;
-      color: #ffcccb;
-      margin-top: 10px;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>📊 สรุปคะแนนผลงาน (รวมทุกกรรมการ)</h1>
-
-    {% for item in summary %}
-    <div class="chart-box">
-      <div class="project-title">🎓 {{ item.project_title or 'ผลงาน ' ~ item.project }}</div>
-      <canvas id="chart-{{ loop.index }}"></canvas>
-      <div class="score-text">
-        คะแนนรวม: {{ item.total_score }} | 
-        ความคิดสร้างสรรค์: {{ item.creativity }} | 
-        ความเป็นไปได้: {{ item.feasibility }} | 
-        การนำเสนอ: {{ item.presentation }}
-      </div>
-=======
     .project img {
       display: block;
       margin: auto;
@@ -127,35 +100,11 @@
       <canvas id="total-chart-{{ loop.index }}" width="300" height="80"></canvas>
       <h2>คะแนนรวม: {{ item.total_score|round(1) }}</h2>
       <canvas id="chart-{{ loop.index }}" width="370" height="200"></canvas>
->>>>>>> fac1b2f (Initial commit with latest version)
     </div>
     {% endfor %}
   </div>
 
   <script>
-<<<<<<< HEAD
-    const summaries = {{ summary | tojson }};
-    summaries.forEach((item, idx) => {
-      const ctx = document.getElementById('chart-' + (idx + 1)).getContext('2d');
-      new Chart(ctx, {
-        type: 'pie',
-        data: {
-          labels: ['ความคิดสร้างสรรค์', 'ความเป็นไปได้', 'การนำเสนอ'],
-          datasets: [{
-            data: [item.creativity, item.feasibility, item.presentation],
-            backgroundColor: ['#4ea8de', '#ff99ac', '#ffd166']
-          }]
-        },
-        options: {
-          plugins: {
-            legend: {
-              labels: {
-                color: '#fff',
-                font: {
-                  size: 14
-                }
-              }
-=======
     Chart.register({
         id: 'labelAtEnd',
         afterDatasetsDraw(chart, args, options) {
@@ -217,13 +166,10 @@
           plugins: {
             legend: {
               display: false
->>>>>>> fac1b2f (Initial commit with latest version)
             }
           }
         }
       });
-<<<<<<< HEAD
-=======
 
       // Chart แนวนอน (bar chart) สำหรับคะแนนรวม
       // Horizontal rainbow bar chart for total score
@@ -270,7 +216,6 @@
             },
             plugins: ['labelAtEnd']  // ✅ ตำแหน่งที่ถูกต้อง
           });
->>>>>>> fac1b2f (Initial commit with latest version)
     });
   </script>
 </body>
